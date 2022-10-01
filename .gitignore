@@ -1,0 +1,8 @@
+
+Web/node_modules/
+*.cmd
+*.log
+*.env
+*.pdn
+Web/.data/
+Web/logs/

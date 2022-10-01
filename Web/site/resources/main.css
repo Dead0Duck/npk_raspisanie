@@ -1,0 +1,9 @@
+body {
+	--bs-body-bg: #111111;
+	--bs-body-color: #eee;
+}
+
+.center {
+	margin-left: auto;
+    margin-right: auto;
+}
