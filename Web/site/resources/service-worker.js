@@ -70,3 +70,18 @@ self.addEventListener("message", function(event) {
         client.postMessage("Responding to " + event.data);
     }));
 });
+
+self.addEventListener('notificationclick', event => {
+    const rootUrl = new URL('/', location).href;
+    event.notification.close();
+    event.waitUntil(
+      clients.matchAll().then(matchedClients => {
+        for (let client of matchedClients) {
+          if (client.url === rootUrl) {
+            return client.focus();
+          }
+        }
+        return clients.openWindow("/");
+      })
+    );
+});
