@@ -10,25 +10,25 @@ function init() {
 		navigator.serviceWorker.register('/service-worker.js')
 			.then((reg) => {
 				console.log('Service worker registered -->', reg);
+
+				if('permissions' in navigator)
+				{
+					navigator.permissions.query({name:'notifications'}).then(perm => {
+						if(perm.state == "granted")
+						{
+							document.getElementById("notify_btn").remove()
+						}
+						else
+						{
+							document.getElementById("notify_btn").addEventListener("click", () => {
+								pushNotifications(reg).catch(error => console.error(error));	
+							})
+						}
+					})
+				}
 			}, (err) => {
 				console.error('Service worker not registered -->', err);
 			});
-	}
-
-	if('permissions' in navigator)
-	{
-		navigator.permissions.query({name:'notifications'}).then(perm => {
-			if(perm.state == "granted")
-			{
-				document.getElementById("notify_btn").remove()
-			}
-			else
-			{
-				document.getElementById("notify_btn").addEventListener("click", () => {
-					pushNotifications(reg).catch(error => console.error(error));	
-				})
-			}
-		})
 	}
 }
 
