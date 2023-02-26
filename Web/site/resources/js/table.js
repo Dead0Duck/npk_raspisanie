@@ -70,7 +70,7 @@
 									<thead>
 										<tr>
 											<th scope="col">№</th>
-											<th scope="col">Группа</th>
+											<th scope="col">Подгруппа</th>
 											<th scope="col">Время</th>
 											<th scope="col">Кабинет</th>
 											<th scope="col">Предмет</th>
@@ -110,7 +110,7 @@
 					{
 						card_html +=	`<tr>
 											<th scope="row">${para+1}</th>
-											<td>-</td>
+											<td>Все</td>
 											<td>${zvonki[para]}</td>
 											<td>${predm_data.cabinet}</td>
 											<td>${predm_data.predmet}</td>
