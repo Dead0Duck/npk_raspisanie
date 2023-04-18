@@ -1,3 +1,4 @@
+module.exports = { run: () => {
 const sql = require('./sql')
 
 require('dotenv').config();
@@ -65,3 +66,5 @@ const port = process.env.PORT || 443
 server.listen(port, () => {
 	console.log(`Сайт запущен на порте ${port}`)
 });
+
+}}

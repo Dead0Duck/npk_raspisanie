@@ -13,3 +13,6 @@ const config = {
 
 const updater = new AutoGitUpdate(config);
 updater.autoUpdate();
+
+setTimeout( () => require('./index').run(), 2000 )
+setInterval( () => updater.autoUpdate(), 1000 * 60 * 60 ) // Проверка на обновления каждый час
