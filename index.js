@@ -32,10 +32,6 @@ const helmet_settings = {
 }
 app.use(helmet(helmet_settings));
 
-// Базовые настройки
-app.set('view engine', 'ejs');
-app.set('views', './site/pages')
-
 // Защита от обращений по IP
 app.all("*", (req, res, next) => {
 	if(req.headers.host == process.env.URL)
