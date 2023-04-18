@@ -6,7 +6,7 @@ const config = {
 	tempLocation: '../RaspisanieAutoUpd/',
 	branch: process.env.GIT_BRANCH,
 	ignoreFiles: [],
-	executeOnComplete: 'npm run start',
+	executeOnComplete: 'npm run updAndStart',
 	exitOnComplete: true,
 	token: process.env.GIT_TOKEN,
 }

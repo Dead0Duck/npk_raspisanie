@@ -1,10 +1,11 @@
 {
   "name": "npk_raspisanie_web",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index"
+    "start": "node index",
+	"updAndStart": "npm i && node index"
   },
   "author": "DeadDuck",
   "license": "ISC",
