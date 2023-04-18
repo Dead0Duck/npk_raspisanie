@@ -16,6 +16,7 @@
     "helmet": "^6.0.0",
     "node-fetch": "^2.6.7",
     "web-push": "^3.5.0",
-    "xlsx": "^0.18.5"
+    "xlsx": "^0.18.5",
+	"auto-git-update": "^2.1.2"
   }
 }

@@ -1,8 +1,8 @@
 
-Web/node_modules/
+node_modules/
 *.cmd
 *.log
 *.env
 *.pdn
-Web/.data/
-Web/logs/
+.data/
+logs/
