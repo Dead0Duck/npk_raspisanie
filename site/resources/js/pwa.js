@@ -18,7 +18,9 @@ function init() {
 							return document.getElementById("btns").remove()
 						
 						document.getElementById("notify_btn").addEventListener("click", () => {
-							pushNotifications(reg).catch(error => console.error(error));	
+							pushNotifications(reg).then(() => {
+								document.getElementById("btns").remove()
+							}).catch(error => console.error(error));	
 						})
 
 						document.getElementById("disable_btn").addEventListener("click", () => {
@@ -49,7 +51,7 @@ function urlBase64ToUint8Array(base64String) {
 	return outputArray;
 }
 
-const publicVapidKey = 'BJNK4Y5DyVxvRlUWBsLM6BC3mpNvGyfwkSB4LzadBZnqm3wJLogVcOWuqjG_YO5w-9nTANFTCJ6dxydAdPT0-Zs';
+const publicVapidKey = 'BDjVam9sBWm14YSQupkL_weSTGiGDmvcF7agulVX967thMzSNMZy0xzB7rOlMdwqmTBjegtPvBrad8WN2h9jiNM';
 async function pushNotifications(registration) {
 	try {
 		console.log('Registering push');

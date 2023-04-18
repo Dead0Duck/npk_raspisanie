@@ -34,7 +34,7 @@ app.use(helmet(helmet_settings));
 
 // Защита от обращений по IP
 app.all("*", (req, res, next) => {
-	if(req.headers.host == process.env.URL)
+	if(req.headers.host.includes(process.env.URL))
 		return next();
 
 	res.sendStatus(403);
