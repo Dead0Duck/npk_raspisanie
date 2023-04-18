@@ -88,22 +88,22 @@
 					// Предмет с делением на группы
 					if(Array.isArray(predm_data))
 					{
-						card_html +=	`<tr>
+						card_html +=	`<tr class="border-bottom-0">
 											<th scope="row">${para+1}</th>
 											<td>1</td>
 											<td>${zvonki[para]}</td>
-											<td>${predm_data[0].cabinet}</td>
-											<td>${predm_data[0].predmet}</td>
-											<td>${predm_data[0].prepod}</td>
+											<td>${predm_data[0].cabinet || ""}</td>
+											<td>${predm_data[0].predmet || ""}</td>
+											<td>${predm_data[0].prepod || ""}</td>
 										</tr>`
 
-						card_html +=	`<tr>
-											<th scope="row">${para+1}</th>
-											<td>2</td>
-											<td>${zvonki[para]}</td>
-											<td>${predm_data[1].cabinet}</td>
-											<td>${predm_data[1].predmet}</td>
-											<td>${predm_data[1].prepod}</td>
+						card_html +=	`<tr class="border-top-0">
+											<th></th>
+											<td class="border-top-1">2</td>
+											<td></td>
+											<td>${predm_data[1].cabinet || ""}</td>
+											<td>${predm_data[1].predmet || ""}</td>
+											<td>${predm_data[1].prepod || ""}</td>
 										</tr>`
 					}
 					else
@@ -112,9 +112,9 @@
 											<th scope="row">${para+1}</th>
 											<td>Все</td>
 											<td>${zvonki[para]}</td>
-											<td>${predm_data.cabinet}</td>
-											<td>${predm_data.predmet}</td>
-											<td>${predm_data.prepod}</td>
+											<td>${predm_data.cabinet || ""}</td>
+											<td>${predm_data.predmet || ""}</td>
+											<td>${predm_data.prepod || ""}</td>
 										</tr>`
 					}
 				}
