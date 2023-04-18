@@ -14,16 +14,17 @@ function init() {
 				if('permissions' in navigator)
 				{
 					navigator.permissions.query({name:'notifications'}).then(perm => {
-						if(perm.state == "granted")
-						{
-							document.getElementById("notify_btn").remove()
-						}
-						else
-						{
-							document.getElementById("notify_btn").addEventListener("click", () => {
-								pushNotifications(reg).catch(error => console.error(error));	
-							})
-						}
+						if(perm.state == "granted" || localStorage.getItem("disable_notification", "0") == "1")
+							return document.getElementById("btns").remove()
+						
+						document.getElementById("notify_btn").addEventListener("click", () => {
+							pushNotifications(reg).catch(error => console.error(error));	
+						})
+
+						document.getElementById("disable_btn").addEventListener("click", () => {
+							localStorage.setItem("disable_notification", "1")
+							document.getElementById("btns").remove()
+						})
 					})
 				}
 			}, (err) => {

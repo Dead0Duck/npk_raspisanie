@@ -4,7 +4,7 @@ const fetch = require('node-fetch')
 let is_started = false
 let raspisanie = {}
 let parsed = {}
-async function ParseRaspisanie(sql, webPush)
+async function ParseRaspisanie(Notifications, webPush)
 {
 	try {
 		let free = true
@@ -21,7 +21,7 @@ async function ParseRaspisanie(sql, webPush)
 				raspisanie = {}
 				free = false
 
-				const pushes = sql.getAllNotifications()
+				const pushes = Notifications.getAll()
 				pushes.forEach(p => {
 					const subscription = {
 						endpoint: p.endpoint,
@@ -37,7 +37,7 @@ async function ParseRaspisanie(sql, webPush)
 							console.error(error)
 							if(error.body == "push subscription has unsubscribed or expired.\n")
 							{
-								sql.delNotification(p.auth, p.p256dh)
+								Notifications.remove(p.auth, p.p256dh)
 							}
 						});
 				})
@@ -81,7 +81,6 @@ async function ParseRaspisanie(sql, webPush)
 							break
 
 						day = day[0].match(`(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.[0-9]{4}`)[0] // Получаем дату из дня
-						console.log(day)
 
 						// Формируем объект расписания
 						raspisanie[day] = raspisanie[day] || {}
@@ -152,11 +151,11 @@ async function ParseRaspisanie(sql, webPush)
 }
 
 module.exports = {
-	start: (sql, webPush) => {
+	start: (Notifications, webPush) => {
 		if(is_started)
 			throw "Парсер расписания уже запущен!"
 
-		ParseRaspisanie(sql, webPush)
+		ParseRaspisanie(Notifications, webPush)
 		setInterval(ParseRaspisanie, 1000 * 60 * 15)
 
 		is_started = true

@@ -66,11 +66,12 @@
 			}
 			else
 			{
+				let hasGroupParas = (data[group].filter(para => Array.isArray(para)).length > 0)
 				card_html +=	`<div class="overflow-auto"><table class="table table-dark table-bordered">
 									<thead>
 										<tr>
 											<th scope="col">№</th>
-											<th scope="col">Подгруппа</th>
+											${hasGroupParas ? '<th scope="col">Подгруппа</th>' : ""}
 											<th scope="col">Время</th>
 											<th scope="col">Кабинет</th>
 											<th scope="col">Предмет</th>
@@ -88,33 +89,33 @@
 					// Предмет с делением на группы
 					if(Array.isArray(predm_data))
 					{
-						card_html +=	`<tr>
+						card_html +=	`<tr class="border-bottom-0">
 											<th scope="row">${para+1}</th>
 											<td>1</td>
 											<td>${zvonki[para]}</td>
-											<td>${predm_data[0].cabinet}</td>
-											<td>${predm_data[0].predmet}</td>
-											<td>${predm_data[0].prepod}</td>
+											<td>${predm_data[0].cabinet || ""}</td>
+											<td>${predm_data[0].predmet || ""}</td>
+											<td>${predm_data[0].prepod || ""}</td>
 										</tr>`
 
-						card_html +=	`<tr>
-											<th scope="row">${para+1}</th>
-											<td>2</td>
-											<td>${zvonki[para]}</td>
-											<td>${predm_data[1].cabinet}</td>
-											<td>${predm_data[1].predmet}</td>
-											<td>${predm_data[1].prepod}</td>
+						card_html +=	`<tr class="border-top-0">
+											<th></th>
+											<td class="border-top-1">2</td>
+											<td></td>
+											<td>${predm_data[1].cabinet || ""}</td>
+											<td>${predm_data[1].predmet || ""}</td>
+											<td>${predm_data[1].prepod || ""}</td>
 										</tr>`
 					}
 					else
 					{
 						card_html +=	`<tr>
 											<th scope="row">${para+1}</th>
-											<td>Все</td>
+											${hasGroupParas ? "<td>Все</td>" : ""}
 											<td>${zvonki[para]}</td>
-											<td>${predm_data.cabinet}</td>
-											<td>${predm_data.predmet}</td>
-											<td>${predm_data.prepod}</td>
+											<td>${predm_data.cabinet || ""}</td>
+											<td>${predm_data.predmet || ""}</td>
+											<td>${predm_data.prepod || ""}</td>
 										</tr>`
 					}
 				}
