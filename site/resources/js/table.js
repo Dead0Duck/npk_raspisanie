@@ -66,11 +66,12 @@
 			}
 			else
 			{
+				let hasGroupParas = (data[group].filter(para => Array.isArray(para)).length > 0)
 				card_html +=	`<div class="overflow-auto"><table class="table table-dark table-bordered">
 									<thead>
 										<tr>
 											<th scope="col">№</th>
-											<th scope="col">Подгруппа</th>
+											${hasGroupParas ? '<th scope="col">Подгруппа</th>' : ""}
 											<th scope="col">Время</th>
 											<th scope="col">Кабинет</th>
 											<th scope="col">Предмет</th>
@@ -110,7 +111,7 @@
 					{
 						card_html +=	`<tr>
 											<th scope="row">${para+1}</th>
-											<td>Все</td>
+											${hasGroupParas ? "<td>Все</td>" : ""}
 											<td>${zvonki[para]}</td>
 											<td>${predm_data.cabinet || ""}</td>
 											<td>${predm_data.predmet || ""}</td>
