@@ -1,5 +1,6 @@
 module.exports = { run: () => {
-const sql = require('./sql')
+
+const Notifications = require('./app_modules/notifications')
 
 require('dotenv').config();
 
@@ -17,8 +18,8 @@ const privateVapidKey = process.env.PRIVATE_VAPID_KEY;
 
 webPush.setVapidDetails('https://'+process.env.URL, publicVapidKey, privateVapidKey);
 
-const RaspisanieParser = require('./parser');
-RaspisanieParser.start(sql, webPush)
+const RaspisanieParser = require('./app_modules/parser');
+RaspisanieParser.start(Notifications, webPush)
 
 app.use(express.json());
 
@@ -53,7 +54,7 @@ app.get('/api/get', (req, res, next) => {
 app.post('/subscribe', (req, res) => {
 	const subscription = req.body
 
-	sql.addNotification({
+	Notifications.add({
 		"p256dh": subscription.keys.p256dh,
 		"auth": subscription.keys.auth,
 		"endpoint": subscription.endpoint
