@@ -20,8 +20,13 @@ function init() {
 			alert("Запрос не удался");
 		};
 
-	if(!navigator.onLine)
+	if (!navigator.onLine)
 	{
 		document.getElementById("offline").style.display = "block";
+	}
+
+	if (localStorage.getItem("board", "0") == "1")
+	{
+		document.getElementById("qr_code").style.display = "block";
 	}
 }
