@@ -4,7 +4,7 @@ const fetch = require('node-fetch')
 let is_started = false
 let raspisanie = {}
 let parsed = {}
-async function ParseRaspisanie(Notifications, webPush)
+async function ParseRaspisanie(notifications, webPush)
 {
 	try {
 		let free = true
@@ -21,26 +21,33 @@ async function ParseRaspisanie(Notifications, webPush)
 				raspisanie = {}
 				free = false
 
-				const pushes = Notifications.getAll()
-				pushes.forEach(p => {
-					const subscription = {
-						endpoint: p.endpoint,
-						expirationTime: null,
-						keys: {
-							p256dh: p.p256dh,
-							auth: p.auth
-						}
-					}
-
-					webPush.sendNotification(subscription, "")
-						.catch(error => {
-							console.error(error)
-							if(error.body == "push subscription has unsubscribed or expired.\n")
-							{
-								Notifications.remove(p.auth, p.p256dh)
+				try
+				{
+					const pushes = notifications.getAll && notifications.getAll() || []
+					pushes.forEach(p => {
+						const subscription = {
+							endpoint: p.endpoint,
+							expirationTime: null,
+							keys: {
+								p256dh: p.p256dh,
+								auth: p.auth
 							}
-						});
-				})
+						}
+
+						webPush.sendNotification(subscription, "")
+							.catch(error => {
+								console.error(error)
+								if(error.body == "push subscription has unsubscribed or expired.\n")
+								{
+									notifications.remove(p.auth, p.p256dh)
+								}
+							});
+					})
+				}
+				catch(e)
+				{
+					console.log('Не удалось разослать оповещения.')
+				}
 			}
 
 			try {
@@ -151,11 +158,11 @@ async function ParseRaspisanie(Notifications, webPush)
 }
 
 module.exports = {
-	start: (Notifications, webPush) => {
+	start: (notifications, webPush) => {
 		if(is_started)
 			throw "Парсер расписания уже запущен!"
 
-		ParseRaspisanie(Notifications, webPush)
+		ParseRaspisanie(notifications, webPush)
 		setInterval(ParseRaspisanie, 1000 * 60 * 15)
 
 		is_started = true
