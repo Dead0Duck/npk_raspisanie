@@ -6,6 +6,7 @@ let raspisanie = {}
 let parsed = {}
 async function ParseRaspisanie(notifications, webPush)
 {
+	notifications.heart()
 	try {
 		let free = true
 		let res = await fetch('https://politech-nsk.ru/index.php/studentam');
