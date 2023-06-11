@@ -21,4 +21,7 @@ module.exports = {
 	getAll: () => {
 		return sqlPush.prepare("SELECT * FROM pushes").all()
 	},
+	heart: () => {
+		sqlPush.prepare("SELECT * FROM pushes").run()
+	}
 }

@@ -6,6 +6,7 @@ let raspisanie = {}
 let parsed = {}
 async function ParseRaspisanie(notifications, webPush)
 {
+	notifications.heart()
 	try {
 		let free = true
 		let res = await fetch('https://politech-nsk.ru/index.php/studentam');
@@ -59,11 +60,19 @@ async function ParseRaspisanie(notifications, webPush)
 				const dataWS = jObj.Sheets[jObj.SheetNames[0]]
 				const data = XLSX.utils.sheet_to_json(dataWS, {header: 1})
 
+				if (data[4][0] != "Расписание занятий")
+				{
+					parsed[l[0].replace(/"/g, "")] = true
+					return
+				}
+
 				let y_start = 0
 				for(let i = 0; i < 10; i++)
 				{
-					if(data[i][1] == "№")
+					if(data[i][1] != "№") continue
+
 					y_start = i
+					break
 				}
 
 				let groups = {}
@@ -74,11 +83,10 @@ async function ParseRaspisanie(notifications, webPush)
 
 				let para_count = 5;
 				for(let i = y_start + 3; i < y_start + 12; i++) {
-					if(data[i][0])
-					{
-						para_count = (i-7)/2
-						break;
-					}
+					if(!data[i][0]) continue
+
+					para_count = parseInt(data[i-2][1])
+					break;
 				}
 
 				Object.entries(groups).forEach(([group, group_pos]) => {
