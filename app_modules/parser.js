@@ -39,10 +39,13 @@ async function ParseRaspisanie(webPush)
 
 						webPush.sendNotification(subscription, "")
 							.catch(error => {
-								console.error(error)
-								if(error.body == "push subscription has unsubscribed or expired.\n")
+								if(error.statusCode == 410 || error.statusCode == 404)
 								{
 									notifications.remove(p.auth, p.p256dh)
+								}
+								else
+								{
+									console.error(error)
 								}
 							});
 					})
