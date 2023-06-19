@@ -19,7 +19,7 @@ const privateVapidKey = process.env.PRIVATE_VAPID_KEY;
 webPush.setVapidDetails('https://'+process.env.URL, publicVapidKey, privateVapidKey);
 
 const RaspisanieParser = require('./app_modules/parser');
-RaspisanieParser.start(notifications, webPush)
+RaspisanieParser.start(webPush)
 
 app.use(express.json());
 

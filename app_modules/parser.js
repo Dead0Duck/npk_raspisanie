@@ -1,10 +1,11 @@
 const XLSX = require("xlsx");
 const fetch = require('node-fetch')
+const notifications = require('./app_modules/notifications')
 
 let is_started = false
 let raspisanie = {}
 let parsed = {}
-async function ParseRaspisanie(notifications, webPush)
+async function ParseRaspisanie(webPush)
 {
 	notifications.heart()
 	try {
