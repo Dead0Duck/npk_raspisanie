@@ -21,6 +21,7 @@ async function ParseRaspisanie(webPush)
 			if(free) {
 				console.log('Обновили расписание!')
 				raspisanie = {}
+				parsed = {}
 				free = false
 
 				try
