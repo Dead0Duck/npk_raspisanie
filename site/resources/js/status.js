@@ -12,7 +12,8 @@ function init() {
 			} else {
 				// localStorage.setItem('raspisanie_last', xhr.response);
 				raspisanie = JSON.parse(xhr.response)
-				gen_group_choose()
+				GenerateGroupChoose()
+				GeneratePrepodChoose()
 			}
 		};
 
