@@ -53,7 +53,18 @@ async function ParseRaspisanie(webPush)
 			}
 
 			try {
-				const res2 = await fetch(`https://politech-nsk.ru${encodeURI(l[0].replace(/"/g, ""))}`);
+				const res2 = await fetch(`https://politech-nsk.ru${encodeURI(l[0].replace(/"/g, ""))}`, {
+					redirect: 'manual',
+				});
+				if (res2.status == 302)
+				{
+					parsed[l[0].replace(/"/g, "")] = true
+					return
+				}
+				else if (res2.status != 200)
+				{
+					return
+				}
 				const XLSXdata = await res2.arrayBuffer();
 
 				const jObj = XLSX.read(XLSXdata, {type: 'array'})
@@ -172,7 +183,8 @@ module.exports = {
 			throw "Парсер расписания уже запущен!"
 
 		ParseRaspisanie(notifications, webPush)
-		setInterval(ParseRaspisanie, 1000 * 60 * 15)
+		// setInterval(ParseRaspisanie, 1000 * 60 * 15)
+		setInterval(ParseRaspisanie, 1000 * 10)
 
 		is_started = true
 	},
