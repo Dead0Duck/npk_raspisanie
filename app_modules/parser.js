@@ -187,8 +187,7 @@ module.exports = {
 			throw "Парсер расписания уже запущен!"
 
 		ParseRaspisanie(notifications, webPush)
-		// setInterval(ParseRaspisanie, 1000 * 60 * 15)
-		setInterval(ParseRaspisanie, 1000 * 10)
+		setInterval(ParseRaspisanie, 1000 * 60 * 15)
 
 		is_started = true
 	},
