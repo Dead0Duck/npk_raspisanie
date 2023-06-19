@@ -1,6 +1,6 @@
 const XLSX = require("xlsx");
 const fetch = require('node-fetch')
-const notifications = require('./app_modules/notifications')
+const notifications = require('./notifications')
 
 let is_started = false
 let raspisanie = {}
